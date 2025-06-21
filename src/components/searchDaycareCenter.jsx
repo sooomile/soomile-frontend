@@ -10,7 +10,7 @@ import useStore from "../hooks/store";
 const SearchDaycareCenter = () => {
   const [daycareCenters, setDaycareCenters] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
-
+  const [selectedCenterId, setSelectedCenterId] = useState(null);
   const currentLocation = useStore((state) => state.currentLocation);
   // console.log(currentLocation);
 
@@ -28,6 +28,10 @@ const SearchDaycareCenter = () => {
     }
   }, [currentLocation, searchDaycareCenter]);
   console.log(daycareCenters);
+
+  const handleCenterClick = (id) => {
+    setSelectedCenterId(id === selectedCenterId ? null : id);
+  };
 
   const renderBody = () => {
     if (daycareCenters.length === 0) {
@@ -49,6 +53,8 @@ const SearchDaycareCenter = () => {
               center={center}
               key={center.id}
               isDummy={center.isDummy}
+              isSelected={center.id === selectedCenterId}
+              onClick={handleCenterClick}
             />
           ))}
           <div className={styles.empty}>
@@ -77,6 +83,8 @@ const SearchDaycareCenter = () => {
               center={center}
               key={center.id}
               isDummy={center.isDummy}
+              isSelected={center.id === selectedCenterId}
+              onClick={handleCenterClick}
             />
           ))}
         </div>
@@ -88,8 +96,13 @@ const SearchDaycareCenter = () => {
       return (
         <>
           <div className={styles.list}>
-            {daycareCenters.slice(0, 5).map((center, index) => (
-              <ContentComp center={center} key={index} />
+            {daycareCenters.slice(0, 5).map((center) => (
+              <ContentComp
+                center={center}
+                key={center.id}
+                isSelected={center.id === selectedCenterId}
+                onClick={handleCenterClick}
+              />
             ))}
           </div>
         </>
