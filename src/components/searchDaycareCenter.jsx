@@ -5,6 +5,7 @@ import styles from "../styles/searchDaycareCenter.module.scss";
 import search from "../assets/search.svg";
 import List from "./list";
 import useStore from "../hooks/store";
+import StationInfo from "./stationInfo";
 
 const SearchDaycareCenter = () => {
   const [daycareCenters, setDaycareCenters] = useState([]);
@@ -95,8 +96,7 @@ const SearchDaycareCenter = () => {
       </div>
       <div className={styles.body}>
         {stationSelected ? (
-          <div>
-            <div>측정소 정보 들어올 공간</div>
+          <div style={{ position: "relative" }}>
             <List
               listToRender={listToRender}
               isStationView={isStationView}
@@ -104,6 +104,7 @@ const SearchDaycareCenter = () => {
               style={{ visibility: "hidden" }}
               searchDaycareCenter={searchDaycareCenter}
             />
+            <StationInfo />
           </div>
         ) : (
           <List
