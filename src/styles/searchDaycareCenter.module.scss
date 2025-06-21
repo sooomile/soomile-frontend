@@ -3,9 +3,15 @@
   flex-direction: column;
   justify-content: start;
   align-items: center;
-  background-color: skyblue;
+  background-color: #fff;
   width: 38vw;
   padding: 20px 1vw;
+  border-radius: 23px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 100px;
+  right: 100px;
+  z-index: 100;
   .header {
     width: 100%;
     display: flex;
