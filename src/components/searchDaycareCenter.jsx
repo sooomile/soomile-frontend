@@ -4,7 +4,7 @@ import { API } from "../hooks/config";
 import styles from "../styles/searchDaycareCenter.module.scss";
 import search from "../assets/search.svg";
 import logo from "../assets/logo.svg";
-import ContentComp from "./contentComp";
+import ListItem from "./listItem";
 import useStore from "../hooks/store";
 
 const SearchDaycareCenter = () => {
@@ -81,7 +81,7 @@ const SearchDaycareCenter = () => {
           const key = isStationView ? item.station_name : item.id;
           const id = isStationView ? item.station_name : item.id;
           return (
-            <ContentComp
+            <ListItem
               center={item}
               key={key}
               isDummy={item.isDummy}

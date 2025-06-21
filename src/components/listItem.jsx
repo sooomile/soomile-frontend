@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styles from "../styles/contentComp.module.scss";
 
-const ContentComp = ({
+const ListItem = ({
   center,
   isDummy,
   isSelected,
@@ -52,4 +52,4 @@ const ContentComp = ({
   );
 };
 
-export default ContentComp;
+export default ListItem;
