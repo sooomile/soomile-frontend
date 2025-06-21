@@ -13,8 +13,11 @@ const SearchDaycareCenter = () => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
     useState("");
+  const stationSelected = useStore((state) => state.stationSelected);
+  const setStationSelected = useStore((state) => state.setStationSelected);
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
+  const setStationInfo = useStore((state) => state.setStationInfo);
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
@@ -38,18 +41,21 @@ const SearchDaycareCenter = () => {
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
+  // 측정소 더블 클릭 ->
   const handleCenterDoubleClick = (center) => {
-    if (stationList.length > 0) return;
-
-    axios
-      .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
-      .then((res) => {
-        setStationList(res.data.data);
-        setSearchDaycareCenter("");
-        setSelectedItemId(null);
-        setSelectedDaycareCenterName(center.daycare_name);
-        setMonitoringCenter(res.data.data.map((item) => item.station_name));
-      });
+    if (stationList.length > 0) {
+      setStationSelected(true);
+    } else {
+      axios
+        .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
+        .then((res) => {
+          setStationList(res.data.data);
+          setSearchDaycareCenter("");
+          setSelectedItemId(null);
+          setSelectedDaycareCenterName(center.daycare_name);
+          setMonitoringCenter(res.data.data.map((item) => item.station_name));
+        });
+    }
   };
 
   // 현재 뷰가 측정소 뷰인지 확인
@@ -79,19 +85,36 @@ const SearchDaycareCenter = () => {
             type="text"
             placeholder="어린이집 이름을 검색하세요."
             value={searchDaycareCenter}
-            onChange={(e) => setSearchDaycareCenter(e.target.value)}
+            onChange={(e) => {
+              setSearchDaycareCenter(e.target.value);
+              setStationSelected(false);
+              setStationInfo([]);
+            }}
           />
         </div>
       </div>
       <div className={styles.body}>
-        <List
-          listToRender={listToRender}
-          isStationView={isStationView}
-          selectedItemId={selectedItemId}
-          handleItemSingleClick={handleItemSingleClick}
-          handleCenterDoubleClick={handleCenterDoubleClick}
-          searchDaycareCenter={searchDaycareCenter}
-        />
+        {stationSelected ? (
+          <div>
+            <div>측정소 정보 들어올 공간</div>
+            <List
+              listToRender={listToRender}
+              isStationView={isStationView}
+              selectedItemId={selectedItemId}
+              style={{ visibility: "hidden" }}
+              searchDaycareCenter={searchDaycareCenter}
+            />
+          </div>
+        ) : (
+          <List
+            listToRender={listToRender}
+            isStationView={isStationView}
+            selectedItemId={selectedItemId}
+            handleItemSingleClick={handleItemSingleClick}
+            handleCenterDoubleClick={handleCenterDoubleClick}
+            searchDaycareCenter={searchDaycareCenter}
+          />
+        )}
       </div>
     </div>
   );

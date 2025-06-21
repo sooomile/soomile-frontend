@@ -9,6 +9,7 @@ const List = ({
   handleItemSingleClick,
   handleCenterDoubleClick,
   searchDaycareCenter,
+  style,
 }) => {
   const dummiesNeeded = 5 - listToRender.length;
   const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
@@ -18,7 +19,7 @@ const List = ({
   const combinedList = [...listToRender, ...dummyItems];
 
   return (
-    <div className={styles.list}>
+    <div className={styles.list} style={style}>
       {combinedList.map((item) => {
         const key = isStationView ? item.station_name : item.id;
         const id = isStationView ? item.station_name : item.id;

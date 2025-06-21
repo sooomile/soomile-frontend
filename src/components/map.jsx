@@ -13,10 +13,9 @@ const Map = () => {
   const [isLoading, setIsLoading] = useState(true);
   const monitoringCenter = useStore((state) => state.monitoringCenter);
 
-  console.log(monitoringCenter);
-
-  // 측정소 정보
-  const [info, setInfo] = useState([]);
+  const stationInfo = useStore((state) => state.stationInfo);
+  const setStationInfo = useStore((state) => state.setStationInfo);
+  // console.log(monitoringCenter);
 
   // 현위치 가져오기
   useEffect(() => {
@@ -47,14 +46,14 @@ const Map = () => {
       Promise.all(promises)
         .then((responses) => {
           const newInfo = responses.map((res) => res.data.data);
-          setInfo(newInfo); // 모든 정보를 한 번에 업데이트
+          setStationInfo(newInfo); // 모든 정보를 한 번에 업데이트
         })
         .catch((err) => {
           console.error("측정소 정보 조회 실패:", err);
         });
     }
-  }, [monitoringCenter]);
-  console.log(info);
+  }, [monitoringCenter, setStationInfo]);
+  // console.log(stationInfo);
   return (
     <KakaoMap
       center={currentLocation}
@@ -67,7 +66,7 @@ const Map = () => {
           <CurrentLocationMarker location={currentLocation} />
 
           {/* 측정소 마커 - 동적으로 렌더링 */}
-          {info.map((stationInfo, index) => (
+          {stationInfo.map((stationInfo, index) => (
             <MonitoringStationMarker key={index} info={stationInfo} />
           ))}
         </div>

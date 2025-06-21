@@ -6,9 +6,16 @@ const useStore = create((set) => ({
     lng: 126.978,
   },
   setCurrentLocation: (location) => set({ currentLocation: location }),
+
   monitoringCenter: [],
   setMonitoringCenter: (monitoringCenter) =>
     set({ monitoringCenter: monitoringCenter }),
+
+  stationInfo: [{}],
+  setStationInfo: (stationInfo) => set({ stationInfo: stationInfo }),
+
+  stationSelected: false,
+  setStationSelected: (stationSelected) => set({ stationSelected: stationSelected }),
 }));
 
 export default useStore;
