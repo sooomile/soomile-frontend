@@ -100,7 +100,9 @@ const SearchDaycareCenter = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>어린이집 검색</div>
+        <div className={styles.title}>
+          <span style={{ color: "#4A3AFF" }}>어린이집</span> 근처 측정소 정보
+        </div>
         <div className={styles.search}>
           <img src={search} alt="search" />
           <input

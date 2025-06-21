@@ -6,6 +6,7 @@ import useStore from "../hooks/store";
 
 const Map = () => {
   const setCurrentLocation = useStore((state) => state.setCurrentLocation);
+  const currentLocation = useStore((state) => state.currentLocation);
 
   // console.log(currentLocation);
 
@@ -55,14 +56,14 @@ const Map = () => {
 
   return (
     <KakaoMap
-      center={location}
+      center={currentLocation}
       style={{ width: "100%", height: "100vh" }}
       level={3}
     >
       {!isLoading && (
         <div>
           {/* 현위치 마커 */}
-          <CurrentLocationMarker location={location} />
+          <CurrentLocationMarker location={currentLocation} />
           {/* 측정소 마커 */}
           <MonitoringStationMarker station={station} info={info} />
           <MonitoringStationMarker station={station2} info={info} />
