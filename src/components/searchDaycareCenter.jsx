@@ -12,13 +12,15 @@ const SearchDaycareCenter = () => {
   const [stationList, setStationList] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
+  const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
+    useState("");
   const currentLocation = useStore((state) => state.currentLocation);
 
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
-      // 검색어가 있으면 측정소 목록을 비우고 어린이집 검색
       setStationList([]);
+      setSelectedDaycareCenterName("");
       axios
         .get(
           `${API.BASE_URL}daycares?name=${searchDaycareCenter}&lat=${currentLocation.lat}&lng=${currentLocation.lng}`
@@ -27,7 +29,6 @@ const SearchDaycareCenter = () => {
           setDaycareCenters(res.data.data);
         });
     } else {
-      // 검색어가 없으면 어린이집 목록 비우기
       setDaycareCenters([]);
     }
   }, [searchDaycareCenter, currentLocation]);
@@ -39,15 +40,15 @@ const SearchDaycareCenter = () => {
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
   const handleCenterDoubleClick = (center) => {
-    // 측정소 목록이 표시된 상태에서는 더블클릭 비활성화
     if (stationList.length > 0) return;
 
     axios
       .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
       .then((res) => {
-        setStationList(res.data.data); // 측정소 목록 state 업데이트
-        setSearchDaycareCenter(""); // 검색창 비우기 (useEffect가 어린이집 목록을 비움)
-        setSelectedItemId(null); // 선택 효과 초기화
+        setStationList(res.data.data);
+        setSearchDaycareCenter("");
+        setSelectedItemId(null);
+        setSelectedDaycareCenterName(center.daycare_name);
       });
   };
 
@@ -58,6 +59,13 @@ const SearchDaycareCenter = () => {
     0,
     5
   );
+
+  const titleText = isStationView ? selectedDaycareCenterName : "어린이집";
+
+  // titleText의 길이에 따라 동적으로 클래스 이름 결정
+  const titleClassName = `${styles.title} ${
+    titleText.length > 10 ? styles.small : ""
+  }`;
 
   const renderBody = () => {
     const dummiesNeeded = 5 - listToRender.length;
@@ -101,8 +109,8 @@ const SearchDaycareCenter = () => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={styles.title}>
-          <span style={{ color: "#4A3AFF" }}>어린이집</span> 근처 측정소 정보
+        <div className={titleClassName}>
+          <span style={{ color: "#4A3AFF" }}>{titleText}</span> 근처 측정소 정보
         </div>
         <div className={styles.search}>
           <img src={search} alt="search" />
