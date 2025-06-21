@@ -28,7 +28,7 @@ const StationInfo = () => {
       <div className={styles.title}>
         <div className={styles.gu}>{selectedStation.station_name}</div>
         <div className={styles.address}>{selectedStation.address}</div>
-        <div className={styles.distance}>{selectedStation.distance}m</div>
+        <div className={styles.distance}>{selectedStation.distance}</div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentWrapper}>
