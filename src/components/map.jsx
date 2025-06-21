@@ -2,8 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Map as KakaoMap, MapMarker } from "react-kakao-maps-sdk";
 import CurrentLocationMarker from "./currentLocationMarker";
 import MonitoringStationMarker from "./monitoringStationMarker";
+import useStore from "../hooks/store";
 
 const Map = () => {
+  const currentLocation = useStore((state) => state.currentLocation);
+  const setCurrentLocation = useStore((state) => state.setCurrentLocation);
+
+  console.log(currentLocation);
+
   // 현위치
   const [location, setLocation] = useState({
     lat: 37.5665, // 서울 시청
@@ -34,7 +40,7 @@ const Map = () => {
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setLocation({
+        setCurrentLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
@@ -46,7 +52,7 @@ const Map = () => {
         setIsLoading(false);
       }
     );
-  }, []);
+  }, [setCurrentLocation]);
 
   return (
     <KakaoMap
