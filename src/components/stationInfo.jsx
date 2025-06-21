@@ -11,22 +11,27 @@ const StationInfo = () => {
         <div className={styles.distance}>400m</div>
       </div>
       <div className={styles.content}>
-        <div className={styles.pm}>
-          <div className={styles.wraper}>
-            <div className={styles.label}>미세먼지</div>
-            <div className={styles.value}>23㎍/㎥</div>
-          </div>
-          <div className={styles.status}>보통</div>
-        </div>
-        <div className={styles.pm}>
-          <div className={styles.wraper}>
-            <div className={styles.label}>초미세먼지</div>
-            <div className={styles.value} style={{ color: "#FF6C6C" }}>
-              23㎍/㎥
+        <div className={styles.contentWrapper}>
+          <div className={styles.pm}>
+            <div className={styles.wraper}>
+              <div className={styles.label}>미세먼지</div>
+              <div className={styles.value}>23㎍/㎥</div>
             </div>
+            <div className={styles.status}>보통</div>
           </div>
-          <div className={styles.status} style={{ backgroundColor: "#FF6C6C" }}>
-            매우나쁨
+          <div className={styles.pm}>
+            <div className={styles.wraper}>
+              <div className={styles.label}>초미세먼지</div>
+              <div className={styles.value} style={{ color: "#FF6C6C" }}>
+                23㎍/㎥
+              </div>
+            </div>
+            <div
+              className={styles.status}
+              style={{ backgroundColor: "#FF6C6C" }}
+            >
+              매우나쁨
+            </div>
           </div>
         </div>
       </div>
