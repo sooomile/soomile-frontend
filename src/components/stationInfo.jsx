@@ -1,28 +1,28 @@
 import styles from "../styles/stationInfo.module.scss";
 import useStore from "../hooks/store";
-import axios from "axios";
-import { API } from "../hooks/config";
 import { useEffect, useState } from "react";
 
 const StationInfo = () => {
   const selectedStation = useStore((state) => state.selectedStation);
-  // console.log("selectedStation", selectedStation);
+  const stationInfo = useStore((state) => state.stationInfo);
 
   const [airQuality, setAirQuality] = useState({
     pm10: 0,
     pm25: 0,
-    status: "",
+    grade: "",
   });
 
+  // 선택한 측정소 정보와 측정소 배열을 비교하여 측정소 정보를 가져옴
   useEffect(() => {
-    if (selectedStation && selectedStation.station_name) {
-      axios
-        .get(`${API.GET_STATIONS}${selectedStation.station_name}/air-quality`)
-        .then((res) => {
-          setAirQuality(res.data.data);
-        });
+    if (stationInfo && selectedStation && selectedStation.station_name) {
+      const matchedStation = stationInfo.find(
+        (station) => station.구이름 === selectedStation.station_name
+      );
+      if (matchedStation) {
+        setAirQuality(matchedStation);
+      }
     }
-  }, [selectedStation]);
+  }, [selectedStation, stationInfo]);
   return (
     <div className={styles.container}>
       <div className={styles.title}>
