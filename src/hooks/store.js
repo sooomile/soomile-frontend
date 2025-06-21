@@ -13,14 +13,14 @@ const useStore = create((set) => ({
   setMonitoringCenter: (monitoringCenter) =>
     set({ monitoringCenter: monitoringCenter }),
 
-  // 측정소 정보
-  stationInfo: [{}],
+  // 측정소 정보 배열 (date, grade, latitude, longitude, pm10, pm25, 구이름, 오존, 일산화탄소)
+  stationInfo: [],
   setStationInfo: (stationInfo) => set({ stationInfo: stationInfo }),
 
-  // 선택한 측정소 정보
-  selectedStationInfo: {},
-  setSelectedStationInfo: (selectedStationInfo) =>
-    set({ selectedStationInfo: selectedStationInfo }),
+  // 선택한 측정소 정보 (address, distance, station_name)
+  selectedStation: {},
+  setSelectedStation: (selectedStation) =>
+    set({ selectedStation: selectedStation }),
 }));
 
 export default useStore;

@@ -17,10 +17,8 @@ const SearchDaycareCenter = () => {
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   const setStationInfo = useStore((state) => state.setStationInfo);
-  const selectedStationInfo = useStore((state) => state.selectedStationInfo);
-  const setSelectedStationInfo = useStore(
-    (state) => state.setSelectedStationInfo
-  );
+  const selectedStation = useStore((state) => state.selectedStation);
+  const setSelectedStation = useStore((state) => state.setSelectedStation);
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
@@ -47,7 +45,8 @@ const SearchDaycareCenter = () => {
   // 측정소 더블 클릭 -> 측정소 정보 표시
   const handleCenterDoubleClick = (center) => {
     if (stationList.length > 0) {
-      setSelectedStationInfo(center);
+      setSelectedStation(center);
+      // console.log("center", center);
     } else {
       axios
         .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
@@ -90,14 +89,14 @@ const SearchDaycareCenter = () => {
             value={searchDaycareCenter}
             onChange={(e) => {
               setSearchDaycareCenter(e.target.value);
-              setSelectedStationInfo({});
+              setSelectedStation({});
               setStationInfo([]);
             }}
           />
         </div>
       </div>
       <div className={styles.body}>
-        {selectedStationInfo.station_name ? (
+        {selectedStation.station_name ? (
           <div style={{ position: "relative" }}>
             <List
               listToRender={listToRender}

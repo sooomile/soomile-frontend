@@ -5,8 +5,8 @@ import { API } from "../hooks/config";
 import { useEffect, useState } from "react";
 
 const StationInfo = () => {
-  const selectedStationInfo = useStore((state) => state.selectedStationInfo);
-  console.log(selectedStationInfo);
+  const selectedStation = useStore((state) => state.selectedStation);
+  // console.log("selectedStation", selectedStation);
 
   const [airQuality, setAirQuality] = useState({
     pm10: 0,
@@ -15,22 +15,20 @@ const StationInfo = () => {
   });
 
   useEffect(() => {
-    if (selectedStationInfo && selectedStationInfo.station_name) {
+    if (selectedStation && selectedStation.station_name) {
       axios
-        .get(
-          `${API.GET_STATIONS}${selectedStationInfo.station_name}/air-quality`
-        )
+        .get(`${API.GET_STATIONS}${selectedStation.station_name}/air-quality`)
         .then((res) => {
           setAirQuality(res.data.data);
         });
     }
-  }, [selectedStationInfo]);
+  }, [selectedStation]);
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <div className={styles.gu}>{selectedStationInfo.station_name}</div>
-        <div className={styles.address}>{selectedStationInfo.address}</div>
-        <div className={styles.distance}>{selectedStationInfo.distance}m</div>
+        <div className={styles.gu}>{selectedStation.station_name}</div>
+        <div className={styles.address}>{selectedStation.address}</div>
+        <div className={styles.distance}>{selectedStation.distance}m</div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentWrapper}>
