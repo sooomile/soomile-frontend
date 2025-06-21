@@ -10,6 +10,12 @@ const Map = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
+  // 종로구
+  const [station, setStation] = useState({
+    lat: 37.572013,
+    lng: 127.005014,
+  });
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -34,23 +40,40 @@ const Map = () => {
       level={3}
     >
       {!isLoading && (
-        <MapMarker
-          position={location}
-          image={{
-            src: currentLocation,
-            size: {
-              width: 64,
-              height: 64,
-            },
-            options: {
-              // 기준점 이미지의 중앙으로 이동
-              offset: {
-                x: 32,
-                y: 32,
+        <>
+          <MapMarker
+            position={location}
+            image={{
+              src: currentLocation,
+              size: {
+                width: 64,
+                height: 64,
               },
-            },
-          }}
-        ></MapMarker>
+              options: {
+                offset: {
+                  x: 32,
+                  y: 32,
+                },
+              },
+            }}
+          ></MapMarker>
+          <MapMarker
+            position={station}
+            image={{
+              src: marker,
+              size: {
+                width: 28,
+                height: 40,
+              },
+              options: {
+                offset: {
+                  x: 14, // 마커 이미지의 너비 절반
+                  y: 40, // 마커 이미지의 높이 (하단에 맞춤)
+                },
+              },
+            }}
+          ></MapMarker>
+        </>
       )}
     </KakaoMap>
   );
