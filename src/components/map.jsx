@@ -24,7 +24,6 @@ const Map = () => {
     value: "23㎍/㎥",
     status: "보통",
   });
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   // 현위치 가져오기
   useEffect(() => {
@@ -58,7 +57,6 @@ const Map = () => {
           <MonitoringStationMarker
             station={station}
             info={info}
-            setIsOverlayOpen={setIsOverlayOpen}
           />
         </div>
       )}
