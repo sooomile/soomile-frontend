@@ -7,6 +7,7 @@ const ContentComp = ({
   isSelected,
   onSingleClick,
   onDoubleClick,
+  isStation,
 }) => {
   const clickTimeout = useRef(null);
 
@@ -32,16 +33,19 @@ const ContentComp = ({
       // 더블클릭을 기다리기 위해 타이머 설정
       clickTimeout.current = setTimeout(() => {
         if (onSingleClick) {
-          onSingleClick(center.id);
+          onSingleClick();
         }
         clickTimeout.current = null;
       }, 250); // 250ms 안에 다른 클릭이 없으면 단일 클릭으로 처리
     }
   };
 
+  // isStation 값에 따라 표시할 이름을 결정
+  const displayName = isStation ? center.station_name : center.daycare_name;
+
   return (
     <div className={itemClass} key={center.id} onClick={handleClick}>
-      <div className={styles.name}>{center.daycare_name}</div>
+      <div className={styles.name}>{displayName}</div>
       <div className={styles.address}>{center.address}</div>
       <div className={styles.distance}>{center.distance}</div>
     </div>

@@ -9,14 +9,16 @@ import useStore from "../hooks/store";
 
 const SearchDaycareCenter = () => {
   const [daycareCenters, setDaycareCenters] = useState([]);
+  const [stationList, setStationList] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
-  const [selectedCenterId, setSelectedCenterId] = useState(null);
+  const [selectedItemId, setSelectedItemId] = useState(null);
   const currentLocation = useStore((state) => state.currentLocation);
-  // console.log(currentLocation);
 
-  // 어린이집 이름 검색
+  // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
+      // 검색어가 있으면 측정소 목록을 비우고 어린이집 검색
+      setStationList([]);
       axios
         .get(
           `${API.BASE_URL}daycares?name=${searchDaycareCenter}&lat=${currentLocation.lat}&lng=${currentLocation.lng}`
@@ -25,103 +27,75 @@ const SearchDaycareCenter = () => {
           setDaycareCenters(res.data.data);
         });
     } else {
+      // 검색어가 없으면 어린이집 목록 비우기
       setDaycareCenters([]);
     }
-  }, [currentLocation, searchDaycareCenter]);
-  console.log(daycareCenters);
+  }, [searchDaycareCenter, currentLocation]);
 
-  const handleCenterSingleClick = (id) => {
-    setSelectedCenterId(id === selectedCenterId ? null : id);
+  // 항목 단일 클릭 (배경색 변경)
+  const handleItemSingleClick = (id) => {
+    setSelectedItemId(id === selectedItemId ? null : id);
   };
 
-  // 어린이집 더블 클릭
+  // 어린이집 더블 클릭 -> 측정소 목록 표시
   const handleCenterDoubleClick = (center) => {
-    console.log(center.id);
+    // 측정소 목록이 표시된 상태에서는 더블클릭 비활성화
+    if (stationList.length > 0) return;
+
     axios
       .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
       .then((res) => {
-        console.log(res.data.data);
+        setStationList(res.data.data); // 측정소 목록 state 업데이트
+        setSearchDaycareCenter(""); // 검색창 비우기 (useEffect가 어린이집 목록을 비움)
+        setSelectedItemId(null); // 선택 효과 초기화
       });
   };
 
-  const renderBody = () => {
-    if (daycareCenters.length === 0) {
-      // 1. 검색 결과가 없을 때
-      const dummiesNeeded = 5 - daycareCenters.length;
-      const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
-        id: `dummy-${i}`,
-        name: " ",
-        address: " ",
-        distance: " ",
-        isDummy: true,
-      }));
-      const combinedList = [...daycareCenters, ...dummyItems];
+  // 현재 뷰가 측정소 뷰인지 확인
+  const isStationView = stationList.length > 0;
+  // 렌더링할 목록과 제목 결정
+  const listToRender = (isStationView ? stationList : daycareCenters).slice(
+    0,
+    5
+  );
 
-      return (
-        <div className={styles.list}>
-          {combinedList.map((center) => (
+  const renderBody = () => {
+    const dummiesNeeded = 5 - listToRender.length;
+    const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
+      id: `dummy-${i}`,
+      isDummy: true,
+    }));
+    const combinedList = [...listToRender, ...dummyItems];
+
+    return (
+      <div className={styles.list}>
+        {combinedList.map((item) => {
+          const key = isStationView ? item.station_name : item.id;
+          const id = isStationView ? item.station_name : item.id;
+          return (
             <ContentComp
-              center={center}
-              key={center.id}
-              isDummy={center.isDummy}
-              isSelected={center.id === selectedCenterId}
-              onSingleClick={handleCenterSingleClick}
+              center={item}
+              key={key}
+              isDummy={item.isDummy}
+              isSelected={id === selectedItemId}
+              isStation={isStationView}
+              onSingleClick={() => handleItemSingleClick(id)}
               onDoubleClick={handleCenterDoubleClick}
             />
-          ))}
+          );
+        })}
+        {listToRender.length === 0 && (
           <div className={styles.empty}>
             <img src={logo} alt="logo" />
-            <div className={styles.description}>주변에 어린이집이 없어요.</div>
+            <div className={styles.description}>
+              {searchDaycareCenter
+                ? "검색 결과가 없어요."
+                : "주변에 어린이집이 없어요."}
+            </div>
           </div>
-        </div>
-      );
-    }
-
-    if (daycareCenters.length > 0 && daycareCenters.length < 5) {
-      const dummiesNeeded = 5 - daycareCenters.length;
-      const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
-        id: `dummy-${i}`,
-        name: " ",
-        address: " ",
-        distance: " ",
-        isDummy: true,
-      }));
-      const combinedList = [...daycareCenters, ...dummyItems];
-
-      return (
-        <div className={styles.list}>
-          {combinedList.map((center) => (
-            <ContentComp
-              center={center}
-              key={center.id}
-              isDummy={center.isDummy}
-              isSelected={center.id === selectedCenterId}
-              onSingleClick={handleCenterSingleClick}
-              onDoubleClick={handleCenterDoubleClick}
-            />
-          ))}
-        </div>
-      );
-    }
-
-    if (daycareCenters.length >= 5) {
-      // 3. 검색 결과가 5개 이상일 때
-      return (
-        <>
-          <div className={styles.list}>
-            {daycareCenters.slice(0, 5).map((center) => (
-              <ContentComp
-                center={center}
-                key={center.id}
-                isSelected={center.id === selectedCenterId}
-                onSingleClick={handleCenterSingleClick}
-                onDoubleClick={handleCenterDoubleClick}
-              />
-            ))}
-          </div>
-        </>
-      );
-    }
+        )}
+      </div>
+    );
   };
 
   return (
