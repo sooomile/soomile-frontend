@@ -14,8 +14,6 @@ const SearchDaycareCenter = () => {
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
     useState("");
-  const stationSelected = useStore((state) => state.stationSelected);
-  const setStationSelected = useStore((state) => state.setStationSelected);
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   const setStationInfo = useStore((state) => state.setStationInfo);
@@ -49,9 +47,7 @@ const SearchDaycareCenter = () => {
   // 측정소 더블 클릭 -> 측정소 정보 표시
   const handleCenterDoubleClick = (center) => {
     if (stationList.length > 0) {
-      setStationSelected(true);
       setSelectedStationInfo(center);
-      console.log(selectedStationInfo);
     } else {
       axios
         .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
@@ -94,14 +90,14 @@ const SearchDaycareCenter = () => {
             value={searchDaycareCenter}
             onChange={(e) => {
               setSearchDaycareCenter(e.target.value);
-              setStationSelected(false);
+              setSelectedStationInfo({});
               setStationInfo([]);
             }}
           />
         </div>
       </div>
       <div className={styles.body}>
-        {stationSelected ? (
+        {selectedStationInfo.station_name ? (
           <div style={{ position: "relative" }}>
             <List
               listToRender={listToRender}

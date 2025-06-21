@@ -15,7 +15,7 @@ const Map = () => {
 
   const stationInfo = useStore((state) => state.stationInfo);
   const setStationInfo = useStore((state) => state.setStationInfo);
-  // console.log(monitoringCenter);
+  console.log(stationInfo);
 
   // 현위치 가져오기
   useEffect(() => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import marker from "../assets/marker.svg";
+import markerNone from "../assets/marker-none.svg";
 import styles from "../styles/monitoringStationMarker.module.scss";
 
 const MonitoringStationMarker = ({ info }) => {
@@ -38,7 +39,7 @@ const MonitoringStationMarker = ({ info }) => {
       <MapMarker
         position={position}
         image={{
-          src: marker,
+          src: markerNone,
           size: {
             width: 28,
             height: 40,
