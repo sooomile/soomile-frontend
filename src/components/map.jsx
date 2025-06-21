@@ -5,10 +5,9 @@ import MonitoringStationMarker from "./monitoringStationMarker";
 import useStore from "../hooks/store";
 
 const Map = () => {
-  const currentLocation = useStore((state) => state.currentLocation);
   const setCurrentLocation = useStore((state) => state.setCurrentLocation);
 
-  console.log(currentLocation);
+  // console.log(currentLocation);
 
   // 현위치
   const [location, setLocation] = useState({

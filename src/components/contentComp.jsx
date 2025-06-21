@@ -8,9 +8,9 @@ const ContentComp = ({ center, isDummy }) => {
 
   return (
     <div className={itemClass} key={center.id}>
-      <div className={styles.name}>{center.name}</div>
+      <div className={styles.name}>{center.daycare_name}</div>
       <div className={styles.address}>{center.address}</div>
-      <div className={styles.distance}>{center.distance}</div>
+      <div className={styles.distance}>{center.distance}m</div>
     </div>
   );
 };
