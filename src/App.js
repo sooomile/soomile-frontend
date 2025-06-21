@@ -1,6 +1,5 @@
 import "./App.css";
 import Main from "./pages/main";
-import SearchDaycareCenter from "./components/searchDaycareCenter";
 import axios from "axios";
 import { API } from "./hooks/config";
 
@@ -11,8 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Main /> */}
-      <SearchDaycareCenter />
+      <Main />
     </div>
   );
 }
