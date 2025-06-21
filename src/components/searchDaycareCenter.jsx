@@ -14,6 +14,7 @@ const SearchDaycareCenter = () => {
   const currentLocation = useStore((state) => state.currentLocation);
   // console.log(currentLocation);
 
+  // 어린이집 이름 검색
   useEffect(() => {
     if (searchDaycareCenter) {
       axios
@@ -29,8 +30,18 @@ const SearchDaycareCenter = () => {
   }, [currentLocation, searchDaycareCenter]);
   console.log(daycareCenters);
 
-  const handleCenterClick = (id) => {
+  const handleCenterSingleClick = (id) => {
     setSelectedCenterId(id === selectedCenterId ? null : id);
+  };
+
+  // 어린이집 더블 클릭
+  const handleCenterDoubleClick = (center) => {
+    console.log(center.id);
+    axios
+      .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
+      .then((res) => {
+        console.log(res.data.data);
+      });
   };
 
   const renderBody = () => {
@@ -54,7 +65,8 @@ const SearchDaycareCenter = () => {
               key={center.id}
               isDummy={center.isDummy}
               isSelected={center.id === selectedCenterId}
-              onClick={handleCenterClick}
+              onSingleClick={handleCenterSingleClick}
+              onDoubleClick={handleCenterDoubleClick}
             />
           ))}
           <div className={styles.empty}>
@@ -84,7 +96,8 @@ const SearchDaycareCenter = () => {
               key={center.id}
               isDummy={center.isDummy}
               isSelected={center.id === selectedCenterId}
-              onClick={handleCenterClick}
+              onSingleClick={handleCenterSingleClick}
+              onDoubleClick={handleCenterDoubleClick}
             />
           ))}
         </div>
@@ -101,7 +114,8 @@ const SearchDaycareCenter = () => {
                 center={center}
                 key={center.id}
                 isSelected={center.id === selectedCenterId}
-                onClick={handleCenterClick}
+                onSingleClick={handleCenterSingleClick}
+                onDoubleClick={handleCenterDoubleClick}
               />
             ))}
           </div>
