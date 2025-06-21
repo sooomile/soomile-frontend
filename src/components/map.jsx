@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Map as KakaoMap, MapMarker } from "react-kakao-maps-sdk";
-import CustomOverlay from "./customOverlay";
-import marker from "../assets/marker.svg";
-import currentLocation from "../assets/currentLocation.svg";
+import CurrentLocationMarker from "./currentLocationMarker";
+import MonitoringStationMarker from "./monitoringStationMarker";
 
 const Map = () => {
+  // 현위치
   const [location, setLocation] = useState({
     lat: 37.5665, // 서울 시청
     lng: 126.978, // 서울 시청
@@ -26,6 +26,7 @@ const Map = () => {
   });
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
+  // 현위치 가져오기
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -50,52 +51,16 @@ const Map = () => {
       level={3}
     >
       {!isLoading && (
-        <>
+        <div>
           {/* 현위치 마커 */}
-          <MapMarker
-            position={location}
-            image={{
-              src: currentLocation,
-              size: {
-                width: 64,
-                height: 64,
-              },
-              options: {
-                offset: {
-                  x: 32,
-                  y: 32,
-                },
-              },
-            }}
-          ></MapMarker>
+          <CurrentLocationMarker location={location} />
           {/* 측정소 마커 */}
-          <MapMarker
-            position={station}
-            image={{
-              src: marker,
-              size: {
-                width: 28,
-                height: 40,
-              },
-              options: {
-                offset: {
-                  x: 14,
-                  y: 40,
-                },
-              },
-            }}
-            onClick={() => setIsOverlayOpen(true)}
-          ></MapMarker>
-
-          {/* 커스텀 오버레이 */}
-          {isOverlayOpen && (
-            <CustomOverlay
-              station={station}
-              info={info}
-              setIsOverlayOpen={setIsOverlayOpen}
-            />
-          )}
-        </>
+          <MonitoringStationMarker
+            station={station}
+            info={info}
+            setIsOverlayOpen={setIsOverlayOpen}
+          />
+        </div>
       )}
     </KakaoMap>
   );
