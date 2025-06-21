@@ -16,6 +16,11 @@ const Map = () => {
     lat: 37.572013,
     lng: 127.005014,
   });
+  // 측정소 위치2
+  const [station2, setStation2] = useState({
+    lat: 37.606769,
+    lng: 127.027364,
+  });
 
   // 측정소 정보
   const [info, setInfo] = useState({
@@ -54,10 +59,8 @@ const Map = () => {
           {/* 현위치 마커 */}
           <CurrentLocationMarker location={location} />
           {/* 측정소 마커 */}
-          <MonitoringStationMarker
-            station={station}
-            info={info}
-          />
+          <MonitoringStationMarker station={station} info={info} />
+          <MonitoringStationMarker station={station2} info={info} />
         </div>
       )}
     </KakaoMap>
