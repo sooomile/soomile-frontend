@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Map as KakaoMap, MapMarker } from "react-kakao-maps-sdk";
+import CustomOverlay from "./customOverlay";
 import marker from "../assets/marker.svg";
 import currentLocation from "../assets/currentLocation.svg";
 
@@ -10,11 +11,20 @@ const Map = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  // 종로구
+  // 측정소 위치
   const [station, setStation] = useState({
     lat: 37.572013,
     lng: 127.005014,
   });
+
+  // 측정소 정보
+  const [info, setInfo] = useState({
+    gu: "성북구",
+    label: "초미세먼지(PM-2.5)",
+    value: "23㎍/㎥",
+    status: "보통",
+  });
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -41,6 +51,7 @@ const Map = () => {
     >
       {!isLoading && (
         <>
+          {/* 현위치 마커 */}
           <MapMarker
             position={location}
             image={{
@@ -57,6 +68,7 @@ const Map = () => {
               },
             }}
           ></MapMarker>
+          {/* 측정소 마커 */}
           <MapMarker
             position={station}
             image={{
@@ -67,12 +79,22 @@ const Map = () => {
               },
               options: {
                 offset: {
-                  x: 14, // 마커 이미지의 너비 절반
-                  y: 40, // 마커 이미지의 높이 (하단에 맞춤)
+                  x: 14,
+                  y: 40,
                 },
               },
             }}
+            onClick={() => setIsOverlayOpen(true)}
           ></MapMarker>
+
+          {/* 커스텀 오버레이 */}
+          {isOverlayOpen && (
+            <CustomOverlay
+              station={station}
+              info={info}
+              setIsOverlayOpen={setIsOverlayOpen}
+            />
+          )}
         </>
       )}
     </KakaoMap>
