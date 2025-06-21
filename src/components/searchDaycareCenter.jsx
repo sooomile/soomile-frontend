@@ -3,8 +3,8 @@ import axios from "axios";
 import { API } from "../hooks/config";
 import styles from "../styles/searchDaycareCenter.module.scss";
 import search from "../assets/search.svg";
-import logo from "../assets/logo.svg";
-import ListItem from "./listItem";
+import List from "./list";
+
 import useStore from "../hooks/store";
 
 const SearchDaycareCenter = () => {
@@ -67,45 +67,6 @@ const SearchDaycareCenter = () => {
     titleText.length > 10 ? styles.small : ""
   }`;
 
-  const renderBody = () => {
-    const dummiesNeeded = 5 - listToRender.length;
-    const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
-      id: `dummy-${i}`,
-      isDummy: true,
-    }));
-    const combinedList = [...listToRender, ...dummyItems];
-
-    return (
-      <div className={styles.list}>
-        {combinedList.map((item) => {
-          const key = isStationView ? item.station_name : item.id;
-          const id = isStationView ? item.station_name : item.id;
-          return (
-            <ListItem
-              center={item}
-              key={key}
-              isDummy={item.isDummy}
-              isSelected={id === selectedItemId}
-              isStation={isStationView}
-              onSingleClick={() => handleItemSingleClick(id)}
-              onDoubleClick={handleCenterDoubleClick}
-            />
-          );
-        })}
-        {listToRender.length === 0 && (
-          <div className={styles.empty}>
-            <img src={logo} alt="logo" />
-            <div className={styles.description}>
-              {searchDaycareCenter
-                ? "검색 결과가 없어요."
-                : "주변에 어린이집이 없어요."}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -122,7 +83,16 @@ const SearchDaycareCenter = () => {
           />
         </div>
       </div>
-      <div className={styles.body}>{renderBody()}</div>
+      <div className={styles.body}>
+        <List
+          listToRender={listToRender}
+          isStationView={isStationView}
+          selectedItemId={selectedItemId}
+          handleItemSingleClick={handleItemSingleClick}
+          handleCenterDoubleClick={handleCenterDoubleClick}
+          searchDaycareCenter={searchDaycareCenter}
+        />
+      </div>
     </div>
   );
 };
