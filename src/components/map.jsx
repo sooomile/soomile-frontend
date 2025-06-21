@@ -1,40 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { Map as KakaoMap, MapMarker } from "react-kakao-maps-sdk";
+import { Map as KakaoMap } from "react-kakao-maps-sdk";
 import CurrentLocationMarker from "./currentLocationMarker";
 import MonitoringStationMarker from "./monitoringStationMarker";
 import useStore from "../hooks/store";
+import axios from "axios";
+import { API } from "../hooks/config";
 
 const Map = () => {
   const setCurrentLocation = useStore((state) => state.setCurrentLocation);
   const currentLocation = useStore((state) => state.currentLocation);
 
-  // console.log(currentLocation);
-
-  // 현위치
-  const [location, setLocation] = useState({
-    lat: 37.5665, // 서울 시청
-    lng: 126.978, // 서울 시청
-  });
   const [isLoading, setIsLoading] = useState(true);
+  const monitoringCenter = useStore((state) => state.monitoringCenter);
 
-  // 측정소 위치
-  const [station, setStation] = useState({
-    lat: 37.572013,
-    lng: 127.005014,
-  });
-  // 측정소 위치2
-  const [station2, setStation2] = useState({
-    lat: 37.606769,
-    lng: 127.027364,
-  });
+  console.log(monitoringCenter);
 
   // 측정소 정보
-  const [info, setInfo] = useState({
-    gu: "성북구",
-    label: "초미세먼지(PM-2.5)",
-    value: "23㎍/㎥",
-    status: "보통",
-  });
+  const [info, setInfo] = useState([]);
 
   // 현위치 가져오기
   useEffect(() => {
@@ -54,6 +36,25 @@ const Map = () => {
     );
   }, [setCurrentLocation]);
 
+  // 측정소 정보 가져오기
+  useEffect(() => {
+    if (monitoringCenter && monitoringCenter.length > 0) {
+      // Promise.all을 사용해 모든 API 요청을 병렬로 처리
+      const promises = monitoringCenter.map((item) =>
+        axios.get(`${API.GET_STATIONS}${item}/air-quality`)
+      );
+
+      Promise.all(promises)
+        .then((responses) => {
+          const newInfo = responses.map((res) => res.data.data);
+          setInfo(newInfo); // 모든 정보를 한 번에 업데이트
+        })
+        .catch((err) => {
+          console.error("측정소 정보 조회 실패:", err);
+        });
+    }
+  }, [monitoringCenter]);
+  console.log(info);
   return (
     <KakaoMap
       center={currentLocation}
@@ -64,9 +65,11 @@ const Map = () => {
         <div>
           {/* 현위치 마커 */}
           <CurrentLocationMarker location={currentLocation} />
-          {/* 측정소 마커 */}
-          <MonitoringStationMarker station={station} info={info} />
-          <MonitoringStationMarker station={station2} info={info} />
+
+          {/* 측정소 마커 - 동적으로 렌더링 */}
+          {info.map((stationInfo, index) => (
+            <MonitoringStationMarker key={index} info={stationInfo} />
+          ))}
         </div>
       )}
     </KakaoMap>

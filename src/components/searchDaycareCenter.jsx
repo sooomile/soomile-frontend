@@ -4,7 +4,6 @@ import { API } from "../hooks/config";
 import styles from "../styles/searchDaycareCenter.module.scss";
 import search from "../assets/search.svg";
 import List from "./list";
-
 import useStore from "../hooks/store";
 
 const SearchDaycareCenter = () => {
@@ -15,7 +14,7 @@ const SearchDaycareCenter = () => {
   const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
     useState("");
   const currentLocation = useStore((state) => state.currentLocation);
-
+  const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
@@ -49,6 +48,7 @@ const SearchDaycareCenter = () => {
         setSearchDaycareCenter("");
         setSelectedItemId(null);
         setSelectedDaycareCenterName(center.daycare_name);
+        setMonitoringCenter(res.data.data.map((item) => item.station_name));
       });
   };
 
