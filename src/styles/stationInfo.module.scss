@@ -13,11 +13,18 @@
     font-size: 16px;
     .gu {
       padding-right: 1vw;
+      white-space: nowrap;
     }
     .address {
       padding-right: 1vw;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .distance {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   .content {

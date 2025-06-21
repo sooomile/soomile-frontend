@@ -15,7 +15,12 @@ const useStore = create((set) => ({
   setStationInfo: (stationInfo) => set({ stationInfo: stationInfo }),
 
   stationSelected: false,
-  setStationSelected: (stationSelected) => set({ stationSelected: stationSelected }),
+  setStationSelected: (stationSelected) =>
+    set({ stationSelected: stationSelected }),
+
+  selectedStationInfo: {},
+  setSelectedStationInfo: (selectedStationInfo) =>
+    set({ selectedStationInfo: selectedStationInfo }),
 }));
 
 export default useStore;

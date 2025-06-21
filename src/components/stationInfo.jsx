@@ -1,36 +1,58 @@
 import styles from "../styles/stationInfo.module.scss";
+import useStore from "../hooks/store";
+import axios from "axios";
+import { API } from "../hooks/config";
+import { useEffect, useState } from "react";
 
 const StationInfo = () => {
+  const selectedStationInfo = useStore((state) => state.selectedStationInfo);
+  console.log(selectedStationInfo);
+
+  const [airQuality, setAirQuality] = useState({
+    pm10: 0,
+    pm25: 0,
+    status: "",
+  });
+
+  useEffect(() => {
+    if (selectedStationInfo && selectedStationInfo.station_name) {
+      axios
+        .get(
+          `${API.GET_STATIONS}${selectedStationInfo.station_name}/air-quality`
+        )
+        .then((res) => {
+          setAirQuality(res.data.data);
+        });
+    }
+  }, [selectedStationInfo]);
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        <div className={styles.gu}>성북구</div>
-        <div className={styles.address}>
-          서울 성북구 삼양로 2길 70 길음2동 주민센터
-        </div>
-        <div className={styles.distance}>400m</div>
+        <div className={styles.gu}>{selectedStationInfo.station_name}</div>
+        <div className={styles.address}>{selectedStationInfo.address}</div>
+        <div className={styles.distance}>{selectedStationInfo.distance}m</div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentWrapper}>
           <div className={styles.pm}>
             <div className={styles.wraper}>
               <div className={styles.label}>미세먼지</div>
-              <div className={styles.value}>23㎍/㎥</div>
+              <div className={styles.value}>{airQuality.pm10}㎍/㎥</div>
             </div>
-            <div className={styles.status}>보통</div>
+            <div className={styles.status}>{airQuality.grade}</div>
           </div>
           <div className={styles.pm}>
             <div className={styles.wraper}>
               <div className={styles.label}>초미세먼지</div>
               <div className={styles.value} style={{ color: "#FF6C6C" }}>
-                23㎍/㎥
+                {airQuality.pm25}㎍/㎥
               </div>
             </div>
             <div
               className={styles.status}
               style={{ backgroundColor: "#FF6C6C" }}
             >
-              매우나쁨
+              {airQuality.grade}
             </div>
           </div>
         </div>
