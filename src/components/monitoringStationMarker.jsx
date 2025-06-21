@@ -4,7 +4,7 @@ import marker from "../assets/marker.svg";
 import markerNone from "../assets/marker-none.svg";
 import styles from "../styles/monitoringStationMarker.module.scss";
 
-const MonitoringStationMarker = ({ info }) => {
+const MonitoringStationMarker = ({ info, selectedStation }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
 
   // info 객체가 유효하고, lat, lng 속성이 있을 때만 렌더링
@@ -13,6 +13,8 @@ const MonitoringStationMarker = ({ info }) => {
   }
 
   const position = { lat: info.latitude, lng: info.longitude };
+
+  const isSelected = selectedStation.station_name === info.구이름;
 
   return (
     <div>
@@ -39,7 +41,7 @@ const MonitoringStationMarker = ({ info }) => {
       <MapMarker
         position={position}
         image={{
-          src: markerNone,
+          src: isSelected ? marker : markerNone,
           size: {
             width: 28,
             height: 40,

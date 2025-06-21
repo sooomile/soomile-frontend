@@ -15,7 +15,7 @@ const Map = () => {
 
   const stationInfo = useStore((state) => state.stationInfo);
   const setStationInfo = useStore((state) => state.setStationInfo);
-  // console.log("stationInfo", stationInfo);
+  const selectedStation = useStore((state) => state.selectedStation);
 
   // 현위치 가져오기
   useEffect(() => {
@@ -67,7 +67,11 @@ const Map = () => {
 
           {/* 측정소 마커 - 동적으로 렌더링 */}
           {stationInfo.map((stationInfo, index) => (
-            <MonitoringStationMarker key={index} info={stationInfo} />
+            <MonitoringStationMarker
+              key={index}
+              info={stationInfo}
+              selectedStation={selectedStation}
+            />
           ))}
         </div>
       )}
