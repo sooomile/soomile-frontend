@@ -18,7 +18,7 @@ const FineDustForecast = () => {
   const forecastData = [
     { day: "오늘", Icon: VeryBadIcon, status: "매우나쁨", type: "today" },
     { day: "내일", Icon: GoodIcon, status: "좋음", type: "tomorrow" },
-    { day: "모레", status: "17시 이후 제공", type: "dayAfter" },
+    { day: "모레", status: "17시 이후\n 제공", type: "dayAfter" },
   ];
 
   return (
