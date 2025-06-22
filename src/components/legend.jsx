@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from '../styles/legend.module.scss';
+import { ReactComponent as ArrowIcon } from '../assets/arrow.svg';
 
 const Legend = () => {
   return (
@@ -10,7 +11,7 @@ const Legend = () => {
         </h3>
         <button className={styles.button}>
           <span>각 측정소별 월 미세먼지 평균보기</span>
-          <span>→</span>
+          <ArrowIcon className={styles.arrowIcon} />
         </button>
       </div>
       <div className={styles.legend}>
