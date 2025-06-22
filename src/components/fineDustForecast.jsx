@@ -29,7 +29,6 @@ const FineDustForecast = () => {
         </h3>
         <span className={styles.date}>{currentDate}</span>
       </div>
-      <hr className={styles.divider} />
       <div className={styles.content}>
         {forecastData.map(({ day, Icon, status, type }) => (
           <div key={day} className={styles.forecastItem}>
@@ -37,7 +36,7 @@ const FineDustForecast = () => {
             {Icon ? (
               <>
                 <Icon className={styles.icon} />
-                <span className={styles.status}>{status}</span>
+                <span className={styles.fineDustStatus}>{status}</span>
               </>
             ) : (
               <div className={styles.unavailable}>

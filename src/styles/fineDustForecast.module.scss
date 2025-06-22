@@ -1,23 +1,23 @@
 .container {
   position: fixed;
-  top: 14vh;
-  right: 240px;
-  z-index: 10;
+  top: 15vh;
+  right: 18vw;
+  z-index: 100;
+  padding: 2vh 1vw;
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: "Pretendard", sans-serif;
-  width: 25vw;
+  border-radius: 23px;
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.25);
+  width: 24.5vw;
   .header {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-bottom: 0;
+    margin-bottom: 10px;
+
     .title {
       font-size: 1rem;
-      font-weight: 600;
-      color: #212529;
+      font-weight: bold;
+      color: #474464;
       margin: 0;
       .highlight {
         color: #6c5ce7;
@@ -28,27 +28,22 @@
       color: #868e96;
     }
   }
-
-  .divider {
-    border: none;
-    border-top: 1px solid #e9ecef;
-    margin: 16px 0;
-  }
   .content {
+    border-top: 1px solid #b0b0c1;
     display: flex;
-    justify-content: flex-start;
-    gap: 31px;
+    justify-content: space-around;
+    gap: 1vw;
     text-align: center;
-    margin-top: 0;
-    padding: 0;
+    padding-top: 2vh;
+    width: 100%;
     .forecastItem {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
-      flex: 1;
+      gap: 0.5vh;
+      white-space: nowrap;
       .today {
-        background-color: #6c5ce7;
+        background-color: #4a3aff;
       }
 
       .tomorrow {
@@ -59,32 +54,31 @@
         background-color: #6e6c83;
       }
       .dayLabel {
-        font-weight: 500;
-        width: 103px;
-        height: 29px;
+        font-weight: bold;
+        font-size: 14px;
+        padding: 6px 2rem;
         border-radius: 4px;
         color: white;
         font-size: 0.8rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        .icon {
-          width: 71px;
-          height: 71px;
-        }
-        .status {
-          font-size: 0.875rem;
-          color: #495057;
-        }
+      }
+      .icon {
+        width: 70%;
+      }
+      .fineDustStatus {
+        font-size: 0.875rem;
+        color: #b0b0c1;
       }
       .unavailable {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 68px; /* icon + status height approx */
+        // height: 68px; /* icon + status height approx */
         font-size: 0.875rem;
         padding: 0;
-        color: #868e96;
+        color: #b0b0c1;
       }
     }
   }
