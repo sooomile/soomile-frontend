@@ -14,7 +14,9 @@ const MonitoringStationMarker = ({ info, selectedStation }) => {
 
   const position = { lat: info.latitude, lng: info.longitude };
 
-  const isSelected = selectedStation.station_name === info.구이름;
+  const isSelected =
+    selectedStation.station_name === info.구이름 ||
+    selectedStation === info.구이름;
 
   return (
     <div>

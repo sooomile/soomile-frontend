@@ -8,12 +8,14 @@ import useStore from "../hooks/store";
 import StationInfo from "./stationInfo";
 
 const SearchDaycareCenter = () => {
+  // useState
   const [daycareCenters, setDaycareCenters] = useState([]);
   const [stationList, setStationList] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
     useState("");
+  // useStore
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   const setStationInfo = useStore((state) => state.setStationInfo);
@@ -39,14 +41,17 @@ const SearchDaycareCenter = () => {
   // 항목 단일 클릭 (배경색 변경)
   const handleItemSingleClick = (id) => {
     setSelectedItemId(id === selectedItemId ? null : id);
+    setSelectedStation(id);
+    console.log("id", id);
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
   // 측정소 더블 클릭 -> 측정소 정보 표시
   const handleCenterDoubleClick = (center) => {
+    // 선택한게 측정소이면 측정소 정보 표시
     if (stationList.length > 0) {
       setSelectedStation(center);
-      // console.log("center", center);
+      // 선택한게 어린이집이면 측정소 목록 표시
     } else {
       axios
         .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)

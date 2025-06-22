@@ -1,6 +1,7 @@
 import logo from "../assets/logo.svg";
 import ListItem from "./listItem";
 import styles from "../styles/searchDaycareCenter.module.scss";
+import useStore from "../hooks/store";
 
 const List = ({
   listToRender,
@@ -11,6 +12,7 @@ const List = ({
   searchDaycareCenter,
   style,
 }) => {
+  // 스타일 유지 위해 더미데이터 추가
   const dummiesNeeded = 5 - listToRender.length;
   const dummyItems = Array.from({ length: dummiesNeeded }, (_, i) => ({
     id: `dummy-${i}`,

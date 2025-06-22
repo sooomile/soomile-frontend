@@ -8,7 +8,7 @@ const useStore = create((set) => ({
   },
   setCurrentLocation: (location) => set({ currentLocation: location }),
 
-  // 측정소 목록
+  // 측정소 목록 (구이름만)
   monitoringCenter: [],
   setMonitoringCenter: (monitoringCenter) =>
     set({ monitoringCenter: monitoringCenter }),
@@ -17,7 +17,8 @@ const useStore = create((set) => ({
   stationInfo: [],
   setStationInfo: (stationInfo) => set({ stationInfo: stationInfo }),
 
-  // 선택한 측정소 정보 (address, distance, station_name)
+  // 측정소 더블클릭 -> 측정소 정보 저장(address, distance, station_name)
+  // 측정소 단일 클릭 -> 측정소 이름 저장
   selectedStation: {},
   setSelectedStation: (selectedStation) =>
     set({ selectedStation: selectedStation }),
