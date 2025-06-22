@@ -24,7 +24,7 @@
 }
 
 .title {
-  font-size: 1rem;
+  font-size: 1.2vw;
   font-weight: 600;
   margin: 0;
   color: #212529;
@@ -40,7 +40,7 @@
   color: white;
   border: none;
   border-radius: 20px;
-  font-size: 0.875rem;
+  font-size: 1vw;
   font-weight: 500;
   cursor: pointer;
   display: flex;
@@ -72,7 +72,7 @@
 .ranges {
   display: grid;
   grid-template-columns: 0.8fr 1fr 1fr 1fr 1fr;
-  font-size: 0.75rem;
+  font-size: 0.9vw;
   color: #495057;
   text-align: center;
 }
