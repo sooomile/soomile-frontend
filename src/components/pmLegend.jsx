@@ -14,10 +14,30 @@ const PmLegend = () => {
       <div className={styles.body}>
         <div className={styles.bar}>
           <div className={styles.barItem}>점검중</div>
-          <div className={styles.barItem}>좋음</div>
-          <div className={styles.barItem}>보통</div>
-          <div className={styles.barItem}>나쁨</div>
-          <div className={styles.barItem}>매우나쁨</div>
+          <div
+            className={styles.barItem}
+            style={{ backgroundColor: "#85EA47" }}
+          >
+            좋음
+          </div>
+          <div
+            className={styles.barItem}
+            style={{ backgroundColor: "#93C5FF" }}
+          >
+            보통
+          </div>
+          <div
+            className={styles.barItem}
+            style={{ backgroundColor: "#ECFF96" }}
+          >
+            나쁨
+          </div>
+          <div
+            className={styles.barItem}
+            style={{ backgroundColor: "#FF6C6C" }}
+          >
+            매우나쁨
+          </div>
         </div>
         <div className={styles.caption}>
           <div className={styles.captionItem}></div>
