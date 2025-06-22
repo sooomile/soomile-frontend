@@ -1,5 +1,6 @@
 import Header from "../components/header";
 import Map from "../components/map";
+import SearchDaycareCenter from "../components/searchDaycareCenter";
 import { useKakaoLoader } from "react-kakao-maps-sdk";
 
 const Main = () => {
@@ -18,6 +19,7 @@ const Main = () => {
         </div>
       )}
       {!loading && !error && <Map />}
+      <SearchDaycareCenter />
     </div>
   );
 };
