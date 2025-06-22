@@ -1,6 +1,7 @@
 import Header from "../components/header";
 import Map from "../components/map";
 import SearchDaycareCenter from "../components/searchDaycareCenter";
+import PmLegend from "../components/pmLegend";
 import { useKakaoLoader } from "react-kakao-maps-sdk";
 
 const Main = () => {
@@ -20,6 +21,7 @@ const Main = () => {
       )}
       {!loading && !error && <Map />}
       <SearchDaycareCenter />
+      <PmLegend />
     </div>
   );
 };
