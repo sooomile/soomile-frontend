@@ -1,0 +1,87 @@
+.container {
+  position: fixed;
+  top: 15vh;
+  right: 18vw;
+  z-index: 100;
+  padding: 2vh 1vw;
+  background-color: white;
+  border-radius: 23px;
+  box-shadow: 0 0 11px rgba(0, 0, 0, 0.25);
+  width: 24.5vw;
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 10px;
+
+    .title {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #474464;
+      margin: 0;
+      .highlight {
+        color: #6c5ce7;
+      }
+    }
+    .date {
+      font-size: 0.75rem;
+      color: #868e96;
+    }
+  }
+  .content {
+    border-top: 1px solid #b0b0c1;
+    display: flex;
+    justify-content: space-around;
+    gap: 1vw;
+    text-align: center;
+    padding-top: 2vh;
+    width: 100%;
+    .forecastItem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5vh;
+      .today {
+        background-color: #4a3aff;
+      }
+
+      .tomorrow {
+        background-color: #b0b0c1;
+      }
+
+      .dayAfter {
+        background-color: #6e6c83;
+      }
+      .dayLabel {
+        font-weight: bold;
+        font-size: 14px;
+        padding: 6px 2rem;
+        border-radius: 4px;
+        color: white;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+      }
+      .icon {
+        width: 70%;
+      }
+      .fineDustStatus {
+        font-size: 16px;
+        color: #b0b0c1;
+      }
+      .unavailable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+        padding: 0;
+        color: #b0b0c1;
+        white-space: pre-line;
+      }
+    }
+  }
+}

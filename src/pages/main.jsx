@@ -3,6 +3,8 @@ import Map from "../components/map";
 import SearchDaycareCenter from "../components/searchDaycareCenter";
 import PmLegend from "../components/pmLegend";
 import { useKakaoLoader } from "react-kakao-maps-sdk";
+import FineDustForecast from "../components/fineDustForecast";
+import AirQualityInfo from "../components/airQualityInfo";
 
 const Main = () => {
   const [loading, error] = useKakaoLoader({
@@ -22,6 +24,8 @@ const Main = () => {
       {!loading && !error && <Map />}
       <SearchDaycareCenter />
       <PmLegend />
+      <FineDustForecast />
+      <AirQualityInfo />
     </div>
   );
 };
