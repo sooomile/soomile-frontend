@@ -3,6 +3,7 @@ import Map from "../components/map";
 import { useKakaoLoader } from "react-kakao-maps-sdk";
 import Legend from "../components/legend";
 import FineDustForecast from "../components/fineDustForecast";
+import AirQualityInfo from '../components/airQualityInfo';
 
 const Main = () => {
   const [loading, error] = useKakaoLoader({
@@ -24,6 +25,7 @@ const Main = () => {
           <Map />
           <Legend />
           <FineDustForecast />
+          <AirQualityInfo />
         </>
       )}
     </div>
