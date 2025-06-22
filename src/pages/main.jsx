@@ -1,6 +1,8 @@
 import Header from "../components/header";
 import Map from "../components/map";
 import { useKakaoLoader } from "react-kakao-maps-sdk";
+import Legend from "../components/legend";
+import FineDustForecast from "../components/fineDustForecast";
 
 const Main = () => {
   const [loading, error] = useKakaoLoader({
@@ -17,7 +19,13 @@ const Main = () => {
           <p>{error.message}</p>
         </div>
       )}
-      {!loading && !error && <Map />}
+      {!loading && !error && (
+        <>
+          <Map />
+          <Legend />
+          <FineDustForecast />
+        </>
+      )}
     </div>
   );
 };
