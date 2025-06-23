@@ -47,7 +47,7 @@ const SearchDaycareCenter = () => {
   const handleItemSingleClick = (id) => {
     setSelectedItemId(id === selectedItemId ? null : id);
     setSelectedStation(id);
-    setSelectedDaycareCenter(id);
+    // setSelectedDaycareCenter(id);
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
@@ -58,8 +58,6 @@ const SearchDaycareCenter = () => {
       setSelectedStation(center);
       // 선택한게 어린이집이면 측정소 목록 표시
     } else {
-      setSelectedDaycareCenter(center);
-      // console.log("center", center);
       axios
         .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
         .then((res) => {

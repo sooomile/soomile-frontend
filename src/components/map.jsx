@@ -58,6 +58,8 @@ const Map = () => {
     }
   }, [monitoringCenter, setStationInfo]);
   // console.log(stationInfo);
+
+  console.log("selectedDaycareCenter", selectedDaycareCenter);
   return (
     <KakaoMap
       center={currentLocation}
@@ -85,6 +87,12 @@ const Map = () => {
               selectedDaycareCenter={selectedDaycareCenter}
             />
           ))}
+          {selectedDaycareCenter && (
+            <DaycareCenterMarker
+              info={selectedDaycareCenter}
+              selectedDaycareCenter={selectedDaycareCenter}
+            />
+          )}
         </div>
       )}
     </KakaoMap>
