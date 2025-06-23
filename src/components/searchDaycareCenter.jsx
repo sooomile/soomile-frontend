@@ -56,9 +56,10 @@ const SearchDaycareCenter = () => {
     // 선택한게 측정소이면 측정소 정보 표시
     if (stationList.length > 0) {
       setSelectedStation(center);
-      setSelectedDaycareCenter(center);
       // 선택한게 어린이집이면 측정소 목록 표시
     } else {
+      setSelectedDaycareCenter(center);
+      // console.log("center", center);
       axios
         .get(`${API.GET_DAYCARE_STATIONS}${center.id}/nearby-stations`)
         .then((res) => {

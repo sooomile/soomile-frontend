@@ -5,7 +5,7 @@ import daycareMarkerNone from "../assets/daycare-none.svg";
 import styles from "../styles/daycareCenterMarker.module.scss";
 
 const DaycareCenterMarker = ({ info, selectedDaycareCenter }) => {
-  console.log("selectedDaycareCenter", selectedDaycareCenter);
+  // console.log("selectedDaycareCenter", selectedDaycareCenter);
   // info 객체가 유효하고, lat, lng 속성이 있을 때만 렌더링
   if (!info || !info.latitude || !info.longitude) {
     return null;
