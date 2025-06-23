@@ -26,11 +26,15 @@ const SearchDaycareCenter = () => {
   const setSelectedDaycareCenter = useStore(
     (state) => state.setSelectedDaycareCenter
   );
+  const setClickedDaycareCenter = useStore(
+    (state) => state.setClickedDaycareCenter
+  );
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
       setStationList([]);
       setSelectedDaycareCenter({});
+      setClickedDaycareCenter({});
       axios
         .get(
           `${API.BASE_URL}daycares?name=${searchDaycareCenter}&lat=${currentLocation.lat}&lng=${currentLocation.lng}`
@@ -47,7 +51,7 @@ const SearchDaycareCenter = () => {
   const handleItemSingleClick = (id) => {
     setSelectedItemId(id === selectedItemId ? null : id);
     setSelectedStation(id);
-    // setSelectedDaycareCenter(id);
+    setClickedDaycareCenter(id);
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시

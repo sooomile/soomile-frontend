@@ -32,6 +32,11 @@ const useStore = create((set) => ({
   selectedDaycareCenter: {},
   setSelectedDaycareCenter: (selectedDaycareCenter) =>
     set({ selectedDaycareCenter: selectedDaycareCenter }),
+
+  // 단일클릭시 선택될 어린이집
+  clickedDaycareCenter: {},
+  setClickedDaycareCenter: (clickedDaycareCenter) =>
+    set({ clickedDaycareCenter: clickedDaycareCenter }),
 }));
 
 export default useStore;
