@@ -7,7 +7,7 @@
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  font-family: 'Pretendard', sans-serif;
+  font-family: "Pretendard", sans-serif;
   width: 38vw;
   height: 151px;
   box-sizing: border-box;
@@ -24,7 +24,7 @@
 }
 
 .title {
-  font-size: 1.2vw;
+  font-size: 16px;
   font-weight: 600;
   margin: 0;
   color: #212529;
@@ -92,16 +92,16 @@
     background-color: #dedee9;
   }
   .good {
-    background-color: #85EA47;
+    background-color: #85ea47;
   }
   .moderate {
-    background-color: #93C5FF;
+    background-color: #93c5ff;
   }
   .bad {
-    background-color: #ECFF96;
+    background-color: #ecff96;
   }
   .veryBad {
-    background-color: #FF6C6C;
+    background-color: #ff6c6c;
   }
 }
 

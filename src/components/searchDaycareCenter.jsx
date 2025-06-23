@@ -75,15 +75,10 @@ const SearchDaycareCenter = () => {
 
   const titleText = isStationView ? selectedDaycareCenterName : "어린이집";
 
-  // titleText의 길이에 따라 동적으로 클래스 이름 결정
-  const titleClassName = `${styles.title} ${
-    titleText.length > 10 ? styles.small : ""
-  }`;
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={titleClassName}>
+        <div className={styles.title}>
           <span style={{ color: "#4A3AFF" }}>{titleText}</span> 근처 측정소 정보
         </div>
         <div className={styles.search}>
