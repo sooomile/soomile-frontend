@@ -22,6 +22,15 @@ const useStore = create((set) => ({
   selectedStation: {},
   setSelectedStation: (selectedStation) =>
     set({ selectedStation: selectedStation }),
+
+  // 어린이집 정보 배열  (어린이집이름, 위도, 경도)
+  daycareCenter: [{}],
+  setDaycareCenter: (daycareCenter) => set({ daycareCenter: daycareCenter }),
+
+  // 선택된 어린이집 정보 (어린이집이름, 위도, 경도)
+  selectedDaycareCenter: {},
+  setSelectedDaycareCenter: (selectedDaycareCenter) =>
+    set({ selectedDaycareCenter: selectedDaycareCenter }),
 }));
 
 export default useStore;
