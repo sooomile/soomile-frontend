@@ -12,8 +12,9 @@ const DaycareCenterMarker = ({ info, selectedDaycareCenter }) => {
 
   const position = { lat: info.latitude, lng: info.longitude };
 
-  const isSelected = selectedDaycareCenter.daycare_name === info.daycare_name;
-
+  const isSelected =
+    selectedDaycareCenter.daycare_name === info.daycare_name ||
+    selectedDaycareCenter === info.daycare_name;
   return (
     <div>
       <CustomOverlayMap position={position}>
