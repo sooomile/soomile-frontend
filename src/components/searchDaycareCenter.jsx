@@ -9,23 +9,28 @@ import StationInfo from "./stationInfo";
 
 const SearchDaycareCenter = () => {
   // useState
-  const [daycareCenters, setDaycareCenters] = useState([]);
   const [stationList, setStationList] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
-  const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
-    useState("");
   // useStore
+  const daycareCenters = useStore((state) => state.daycareCenters);
+  const setDaycareCenters = useStore((state) => state.setDaycareCenters);
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   const setStationInfo = useStore((state) => state.setStationInfo);
   const selectedStation = useStore((state) => state.selectedStation);
   const setSelectedStation = useStore((state) => state.setSelectedStation);
+  const selectedDaycareCenter = useStore(
+    (state) => state.selectedDaycareCenter
+  );
+  const setSelectedDaycareCenter = useStore(
+    (state) => state.setSelectedDaycareCenter
+  );
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
       setStationList([]);
-      setSelectedDaycareCenterName("");
+      setSelectedDaycareCenter({});
       axios
         .get(
           `${API.BASE_URL}daycares?name=${searchDaycareCenter}&lat=${currentLocation.lat}&lng=${currentLocation.lng}`
@@ -42,7 +47,7 @@ const SearchDaycareCenter = () => {
   const handleItemSingleClick = (id) => {
     setSelectedItemId(id === selectedItemId ? null : id);
     setSelectedStation(id);
-    console.log("id", id);
+    // setSelectedDaycareCenter(id);
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
@@ -59,7 +64,7 @@ const SearchDaycareCenter = () => {
           setStationList(res.data.data);
           setSearchDaycareCenter("");
           setSelectedItemId(null);
-          setSelectedDaycareCenterName(center.daycare_name);
+          setSelectedDaycareCenter(center);
           setMonitoringCenter(res.data.data.map((item) => item.station_name));
         });
     }
@@ -73,17 +78,14 @@ const SearchDaycareCenter = () => {
     5
   );
 
-  const titleText = isStationView ? selectedDaycareCenterName : "어린이집";
-
-  // titleText의 길이에 따라 동적으로 클래스 이름 결정
-  const titleClassName = `${styles.title} ${
-    titleText.length > 10 ? styles.small : ""
-  }`;
+  const titleText = isStationView
+    ? selectedDaycareCenter.daycare_name
+    : "어린이집";
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <div className={titleClassName}>
+        <div className={styles.title}>
           <span style={{ color: "#4A3AFF" }}>{titleText}</span> 근처 측정소 정보
         </div>
         <div className={styles.search}>
