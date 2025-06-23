@@ -9,18 +9,25 @@ import StationInfo from "./stationInfo";
 
 const SearchDaycareCenter = () => {
   // useState
-  const [daycareCenters, setDaycareCenters] = useState([]);
   const [stationList, setStationList] = useState([]);
   const [searchDaycareCenter, setSearchDaycareCenter] = useState("");
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [selectedDaycareCenterName, setSelectedDaycareCenterName] =
     useState("");
   // useStore
+  const daycareCenters = useStore((state) => state.daycareCenters);
+  const setDaycareCenters = useStore((state) => state.setDaycareCenters);
   const currentLocation = useStore((state) => state.currentLocation);
   const setMonitoringCenter = useStore((state) => state.setMonitoringCenter);
   const setStationInfo = useStore((state) => state.setStationInfo);
   const selectedStation = useStore((state) => state.selectedStation);
   const setSelectedStation = useStore((state) => state.setSelectedStation);
+  const selectedDaycareCenter = useStore(
+    (state) => state.selectedDaycareCenter
+  );
+  const setSelectedDaycareCenter = useStore(
+    (state) => state.setSelectedDaycareCenter
+  );
   // 어린이집 이름 검색 Effect
   useEffect(() => {
     if (searchDaycareCenter) {
