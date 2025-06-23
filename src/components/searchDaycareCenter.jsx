@@ -47,6 +47,7 @@ const SearchDaycareCenter = () => {
   const handleItemSingleClick = (id) => {
     setSelectedItemId(id === selectedItemId ? null : id);
     setSelectedStation(id);
+    setSelectedDaycareCenter(id);
   };
 
   // 어린이집 더블 클릭 -> 측정소 목록 표시
@@ -78,7 +79,9 @@ const SearchDaycareCenter = () => {
     5
   );
 
-  const titleText = isStationView ? selectedDaycareCenter.daycare_name : "어린이집";
+  const titleText = isStationView
+    ? selectedDaycareCenter.daycare_name
+    : "어린이집";
 
   return (
     <div className={styles.container}>

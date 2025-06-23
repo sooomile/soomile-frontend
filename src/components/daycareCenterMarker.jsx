@@ -5,6 +5,7 @@ import daycareMarkerNone from "../assets/daycare-none.svg";
 import styles from "../styles/daycareCenterMarker.module.scss";
 
 const DaycareCenterMarker = ({ info, selectedDaycareCenter }) => {
+  console.log("selectedDaycareCenter", selectedDaycareCenter);
   // info 객체가 유효하고, lat, lng 속성이 있을 때만 렌더링
   if (!info || !info.latitude || !info.longitude) {
     return null;
@@ -12,9 +13,7 @@ const DaycareCenterMarker = ({ info, selectedDaycareCenter }) => {
 
   const position = { lat: info.latitude, lng: info.longitude };
 
-  const isSelected =
-    selectedDaycareCenter.daycare_name === info.daycare_name ||
-    selectedDaycareCenter === info.daycare_name;
+  const isSelected = selectedDaycareCenter === info.id;
   return (
     <div>
       <CustomOverlayMap position={position}>
