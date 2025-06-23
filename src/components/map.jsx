@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Map as KakaoMap } from "react-kakao-maps-sdk";
 import CurrentLocationMarker from "./currentLocationMarker";
 import MonitoringStationMarker from "./monitoringStationMarker";
+import DaycareCenterMarker from "./daycareCenterMarker";
 import useStore from "../hooks/store";
 import axios from "axios";
 import { API } from "../hooks/config";
@@ -16,7 +17,10 @@ const Map = () => {
   const stationInfo = useStore((state) => state.stationInfo);
   const setStationInfo = useStore((state) => state.setStationInfo);
   const selectedStation = useStore((state) => state.selectedStation);
-
+  const daycareCenters = useStore((state) => state.daycareCenters);
+  const selectedDaycareCenter = useStore(
+    (state) => state.selectedDaycareCenter
+  );
   // 현위치 가져오기
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -71,6 +75,14 @@ const Map = () => {
               key={index}
               info={stationInfo}
               selectedStation={selectedStation}
+            />
+          ))}
+          {/* 어린이집 마커 - 동적으로 렌더링 */}
+          {daycareCenters.map((daycareCenters, index) => (
+            <DaycareCenterMarker
+              key={index}
+              info={daycareCenters}
+              selectedDaycareCenter={selectedDaycareCenter}
             />
           ))}
         </div>
