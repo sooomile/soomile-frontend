@@ -33,8 +33,8 @@ const MonitoringStationMarker = ({ info, selectedStation }) => {
               </button>
             </div>
             <div className={styles.body}>
-              <div className={styles.label}>초미세먼지(PM-2.5):</div>
-              <div className={styles.value}>{info.pm25}㎍/㎥</div>
+              <div className={styles.label}>미세먼지(PM-10):</div>
+              <div className={styles.value}>{info.pm10}㎍/㎥</div>
               <div className={styles.status}>{info.grade}</div>
             </div>
           </div>
