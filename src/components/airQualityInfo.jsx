@@ -26,6 +26,7 @@ const AirQualityInfo = () => {
 
   // 농도 값에 따른 글자 색상
   const getValueColor = (type, value) => {
+    if (value === '점검 중') return '#DEDEE9';
     const numericValue = parseInt(value, 10);
     if (isNaN(numericValue)) return "#212529"; // 기본 색상
 

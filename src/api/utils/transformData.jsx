@@ -11,11 +11,11 @@ export const transformAirQualityData = (apiData) => {
     grade: apiData.grade || 'unknown',
     pm25: {
       label: '초미세먼지',
-      value: apiData.pm25 ? `${apiData.pm25}µg/m³` : '측정 불가',
+      value: apiData.pm25 ? `${apiData.pm25}µg/m³` : '점검 중',
     },
     pm10: {
       label: '미세먼지',
-      value: apiData.pm10 ? `${apiData.pm10}µg/m³` : '측정 불가',
+      value: apiData.pm10 ? `${apiData.pm10}µg/m³` : '점검 중',
     },
   };
 }; 

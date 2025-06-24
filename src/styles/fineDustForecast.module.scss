@@ -1,3 +1,4 @@
+// fineDustForecast.module.scss
 .container {
   position: fixed;
   top: 15vh;
@@ -8,6 +9,7 @@
   border-radius: 23px;
   box-shadow: 0 0 11px rgba(0, 0, 0, 0.25);
   width: 24.5vw;
+  height: 28vh;
   .header {
     display: flex;
     flex-direction: column;
@@ -41,18 +43,7 @@
       flex-direction: column;
       align-items: center;
       gap: 0.5vh;
-      .today {
-        background-color: #4a3aff;
-      }
-
-      .tomorrow {
-        background-color: #b0b0c1;
-      }
-
-      .dayAfter {
-        background-color: #6e6c83;
-      }
-      .dayLabel {
+      .tab {
         font-weight: bold;
         font-size: 14px;
         padding: 6px 2rem;
@@ -64,12 +55,31 @@
         justify-content: center;
         white-space: nowrap;
       }
-      .icon {
-        width: 70%;
+      .today {
+        background-color: #4a3aff;
       }
-      .fineDustStatus {
-        font-size: 1rem;
-        color: #b0b0c1;
+
+      .tomorrow {
+        background-color: #b0b0c1;
+      }
+
+      .dayAfter {
+        background-color: #6e6c83;
+      }
+      .forecastContent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.5vh;
+
+        .gradeIcon {
+          width: 70%;
+        }
+        .gradeText {
+          font-size: 1rem;
+          color: #b0b0c1;
+        }
       }
       .unavailable {
         display: flex;
