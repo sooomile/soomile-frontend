@@ -2,9 +2,9 @@ import defaultInstance from "../../utils/instance";
 
 const getAirQualityByLocation = async (lat, lng) => {
     try {
-      
-
-        const response = await defaultInstance.get(`/stations/air-quality?lat=${lat}&lng=${lng}`);
+        const url = `/stations/air-quality?lat=${lat}&lng=${lng}`;
+        console.log("[AirQuality API] GET:", url);
+        const response = await defaultInstance.get(url);
         
         if (response.status === 200) {
             console.log("대기질 정보 조회 성공");
