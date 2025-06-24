@@ -177,7 +177,7 @@ const FineDustForecast = () => {
           </div>
         ))}
       </div>
-      {error && <div className={styles.error}>{error}</div>}
+      {/* {error && <div className={styles.error}>{error}</div>} */}
     </div>
   );
 };
