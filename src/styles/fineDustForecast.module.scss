@@ -5,9 +5,10 @@
   z-index: 100;
   padding: 2vh 1vw;
   background-color: white;
-  border-radius: 23px;
+  border-radius: 12px;
   box-shadow: 0 0 11px rgba(0, 0, 0, 0.25);
   width: 24.5vw;
+  height: 28vh;
   .header {
     display: flex;
     flex-direction: column;
@@ -15,7 +16,7 @@
     margin-bottom: 10px;
 
     .title {
-      font-size: 1rem;
+      font-size: 20px;
       font-weight: bold;
       color: #474464;
       margin: 0;
@@ -24,52 +25,70 @@
       }
     }
     .date {
-      font-size: 0.75rem;
+      font-size: 16px;
       color: #868e96;
+      padding-bottom:8px;
     }
   }
-  .content {
+  .divider {
     border-top: 1px solid #b0b0c1;
+    width: 100%;
+    margin: 1vh 0 1.5vh 0;
+  }
+  .content {
     display: flex;
     justify-content: space-around;
     gap: 1vw;
     text-align: center;
-    padding-top: 2vh;
+    padding-top: 0.8vh;
     width: 100%;
     .forecastItem {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.5vh;
-      .today {
-        background-color: #4a3aff;
-      }
-
-      .tomorrow {
-        background-color: #b0b0c1;
-      }
-
-      .dayAfter {
-        background-color: #6e6c83;
-      }
-      .dayLabel {
+      .tab {//오늘 내일 모레
+        color: #fff;
+        border-radius: 8px;
+        width: 5.7vw;
+        height: 2.9vh;
         font-weight: bold;
-        font-size: 14px;
-        padding: 6px 2rem;
-        border-radius: 4px;
-        color: white;
-        font-size: 0.8rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        white-space: nowrap;
-      }
-      .icon {
-        width: 70%;
-      }
-      .fineDustStatus {
         font-size: 16px;
-        color: #b0b0c1;
+        min-width: 60px;
+        text-align: center;
+        margin-bottom: 1vh;
+        display: flex;             
+        align-items: center;        
+        justify-content: center;
+      }
+      .today {
+        background: #4a3aff;
+      }
+      .tomorrow {
+        background: #B0B0C1;
+      }
+      .dayAfter {
+        background: #6E6C83;
+      }
+      .forecastContent {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3vh;
+        min-height: 80px;
+        justify-content: center;
+      }
+      .gradeIcon {
+        padding-top:2vh;
+        padding-bottom: 2vh;
+        width: 4vw;
+        height: 4vw;
+      }
+      .gradeText {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 0.3vh;
+        color: #B0B0C1;
       }
       .unavailable {
         display: flex;
@@ -81,7 +100,16 @@
         padding: 0;
         color: #b0b0c1;
         white-space: pre-line;
+        min-height: 80px;
       }
     }
+  }
+  .error {
+    color: #ff6c6c;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 1vh;
+    padding: 0.5vh;
+    border-radius: 8px;
   }
 }
