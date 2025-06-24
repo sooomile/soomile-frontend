@@ -10,7 +10,9 @@ import getFineDustForecastByLocation from "../api/api/fineDust/fineDustForecastB
 
 const FineDustForecast = () => {
   const currentLocation = useStore((state) => state.currentLocation);
-  const selectedDaycareCenter = useStore((state) => state.selectedDaycareCenter);
+  const selectedDaycareCenter = useStore(
+    (state) => state.selectedDaycareCenter
+  );
   const [currentDate, setCurrentDate] = useState("");
   const [forecastData, setForecastData] = useState([
     { day: "오늘", pm10: null, grade: null },
@@ -95,18 +97,21 @@ const FineDustForecast = () => {
         }
       });
     } else if (currentLocation?.lat && currentLocation?.lng) {
-      getFineDustForecastByLocation(currentLocation.lat, currentLocation.lng).then((result) => {
+      getFineDustForecastByLocation(
+        currentLocation.lat,
+        currentLocation.lng
+      ).then((result) => {
         if (result.success) {
           // API에서 grade, pm10 모두 제공
           const today = new Date();
-          const days = [0, 1, 2].map(i => {
+          const days = [0, 1, 2].map((i) => {
             const d = new Date(today);
             d.setDate(today.getDate() + i);
             return d.toISOString().slice(0, 10);
           });
           const dayLabels = ["오늘", "내일", "모레"];
           const mapped = days.map((dateStr, idx) => {
-            const found = result.data.find(d => d.date === dateStr);
+            const found = result.data.find((d) => d.date === dateStr);
             return {
               day: dayLabels[idx],
               pm10: found ? found.pm10 : null,
@@ -133,7 +138,7 @@ const FineDustForecast = () => {
         <h3 className={styles.title}>
           <span className={styles.highlight}>
             {selectedDaycareCenter?.id
-              ? (selectedDaycareCenter.daycare_name || "어린이집")//어린이집 이름 혹은 현위치
+              ? selectedDaycareCenter.daycare_name || "어린이집" //어린이집 이름 혹은 현위치
               : "현 위치"}
           </span>{" "}
           미세먼지 예보
@@ -166,7 +171,7 @@ const FineDustForecast = () => {
               </div>
             ) : (
               <div className={styles.unavailable}>
-                <span>{"정보 불러오는 중..."}</span>
+                <span>{"불러오는 중..."}</span>
               </div>
             )}
           </div>
