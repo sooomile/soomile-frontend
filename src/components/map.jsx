@@ -21,6 +21,7 @@ const Map = () => {
   const selectedDaycareCenter = useStore(
     (state) => state.selectedDaycareCenter
   );
+  const clickedDaycareCenter = useStore((state) => state.clickedDaycareCenter);
   // 현위치 가져오기
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -59,7 +60,8 @@ const Map = () => {
   }, [monitoringCenter, setStationInfo]);
   // console.log(stationInfo);
 
-  console.log("selectedDaycareCenter", selectedDaycareCenter);
+  // console.log("selectedDaycareCenter", selectedDaycareCenter);
+  console.log("clickedDaycareCenter", clickedDaycareCenter);
   return (
     <KakaoMap
       center={currentLocation}
@@ -84,7 +86,7 @@ const Map = () => {
             <DaycareCenterMarker
               key={index}
               info={daycareCenters}
-              selectedDaycareCenter={selectedDaycareCenter}
+              selectedDaycareCenter={clickedDaycareCenter}
             />
           ))}
           {selectedDaycareCenter && (

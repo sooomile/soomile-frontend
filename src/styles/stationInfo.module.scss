@@ -10,7 +10,7 @@
     align-items: start;
     justify-content: start;
     color: #b0b0c1;
-    font-size: 16px;
+    font-size: 1rem;
     .gu {
       padding-right: 1vw;
       white-space: nowrap;
@@ -47,10 +47,10 @@
           align-items: end;
           justify-content: space-between;
           gap: 0.5vw;
-          padding: 34px 0px 16px 0px;
+          padding: 34px 0px 1rem 0px;
           .label {
             color: #1e1b39;
-            font-size: 16px;
+            font-size: 1rem;
             white-space: nowrap;
           }
           .value {
@@ -63,7 +63,7 @@
           background-color: #6cb0ff;
           width: 100%;
           color: #fff;
-          font-size: 16px;
+          font-size: 1rem;
           padding: 4px 0px;
         }
       }
@@ -72,9 +72,9 @@
   .footer {
     color: #b0b0c1;
     display: flex;
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     width: 100%;
-    padding: 16px 0px;
+    padding: 1rem 0px;
   }
 }
