@@ -166,7 +166,7 @@ const FineDustForecast = () => {
               </div>
             ) : (
               <div className={styles.unavailable}>
-                <span>{day === "모레" ? "17시 이후 제공" : "점검중"}</span>
+                <span>{"정보 불러오는 중..."}</span>
               </div>
             )}
           </div>
