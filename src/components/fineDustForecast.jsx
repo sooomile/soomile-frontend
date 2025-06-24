@@ -131,7 +131,12 @@ const FineDustForecast = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <h3 className={styles.title}>
-          <span className={styles.highlight}>미세먼지</span> 예보
+          <span className={styles.highlight}>
+            {selectedDaycareCenter?.id
+              ? (selectedDaycareCenter.daycare_name || "어린이집")//어린이집 이름 혹은 현위치
+              : "현 위치"}
+          </span>{" "}
+          미세먼지 예보
         </h3>
         <span className={styles.date}>{currentDate}</span>
       </div>
