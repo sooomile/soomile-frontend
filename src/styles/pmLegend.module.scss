@@ -18,13 +18,13 @@
     width: 100%;
     display: flex;
     .title {
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: bold;
       color: #1e1b39;
       margin-bottom: 1rem;
     }
     .modalButton {
-      font-size: 16px;
+      font-size: 1rem;
       color: #f0f0f6;
       background-color: #4a3aff;
       display: flex;
@@ -41,7 +41,7 @@
   .body {
     width: 100%;
     .bar {
-      font-size: 16px;
+      font-size: 1rem;
       color: #474464;
       display: flex;
       align-items: center;
@@ -53,7 +53,7 @@
       }
     }
     .caption {
-      font-size: 16px;
+      font-size: 1rem;
       color: #1e1b39;
       display: flex;
       align-items: center;
